@@ -9,6 +9,9 @@ import ru.korteng.wallet.exception.WalletNotFoundException;
 import ru.korteng.wallet.model.Wallet;
 import ru.korteng.wallet.repository.WalletRepository;
 
+import java.math.BigDecimal;
+import java.util.UUID;
+
 import static ru.korteng.wallet.dto.WalletRequest.OperationType.DEPOSIT;
 
 @Service
@@ -28,7 +31,19 @@ public class WalletService {
         return new WalletResponse(wallet.getId(), wallet.getBalance());
     }
 
+    public Wallet getWallet (UUID id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new WalletNotFoundException(id));
+    }
+
     public WalletService(WalletRepository repository) {
         this.repository = repository;
+    }
+
+    public Wallet createWallet(BigDecimal initialBalance) {
+        Wallet wallet = new Wallet();
+        wallet.setId(UUID.randomUUID());
+        wallet.setBalance(initialBalance);
+        return repository.save(wallet);
     }
 }
