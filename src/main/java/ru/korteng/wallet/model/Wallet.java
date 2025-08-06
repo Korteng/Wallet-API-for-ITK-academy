@@ -1,9 +1,6 @@
 package ru.korteng.wallet.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 import ru.korteng.wallet.exception.InsufficientFundsException;
 
@@ -12,7 +9,6 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "wallet")
-@Data
 public class Wallet {
 
     @Id
@@ -34,5 +30,21 @@ public class Wallet {
             throw new InsufficientFundsException("Недостаточно средств на Вашем счёте.");
         }
         this.balance = balance.subtract(amount);
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public BigDecimal getBalance() {
+        return balance;
+    }
+
+    public void setBalance(BigDecimal balance) {
+        this.balance = balance;
     }
 }
