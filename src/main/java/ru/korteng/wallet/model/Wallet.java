@@ -18,6 +18,14 @@ public class Wallet {
     @Column(name = "balance", nullable = false)
     private BigDecimal balance = BigDecimal.ZERO;
 
+    public Wallet(UUID id, BigDecimal balance) {
+        this.id = id;
+        this.balance = balance;
+    }
+
+    public Wallet() {
+    }
+
     public void deposit(BigDecimal amount) {
         if (amount.compareTo(BigDecimal.ZERO) <= 0) {
             throw new IllegalArgumentException("Сумма должна быть положительной.");

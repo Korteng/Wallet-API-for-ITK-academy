@@ -23,6 +23,12 @@ public class WalletRequest {
         WITHDRAW
     }
 
+    public WalletRequest(UUID id, OperationType operationType, BigDecimal amount) {
+        this.id = id;
+        this.operationType = operationType;
+        this.amount = amount;
+    }
+
     public @NotNull UUID getId() {
         return id;
     }

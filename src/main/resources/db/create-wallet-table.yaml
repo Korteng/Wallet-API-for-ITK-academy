@@ -14,3 +14,5 @@ databaseChangeLog:
               - column:
                   name: balance
                   type: DECIMAL(19, 2)
+                  constraints:
+                    nullable: false
